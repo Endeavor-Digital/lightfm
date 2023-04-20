@@ -8,7 +8,17 @@ import textwrap
 from setuptools import Command, Extension, setup
 
 # Import version even when extensions are not yet built
-__builtins__.__LIGHTFM_SETUP__ = True
+
+try:
+    __builtins__.__LIGHTFM_SETUP__ = True
+except:
+    try:
+        # For python 3
+        import builtins
+        builtins.__LIGHTFM_SETUP__ = False
+    except:
+        print("Skipping numpy hack; if installation fails, try installing numpy first")
+
 from lightfm import __version__ as version  # NOQA
 
 
